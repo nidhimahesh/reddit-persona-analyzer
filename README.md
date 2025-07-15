@@ -1,6 +1,6 @@
 # Reddit User Persona Analyzer
 
-A Python script that analyzes Reddit user profiles to generate comprehensive user personas based on their posts and comments.
+This is a Python script that analyzes a Reddit user's public posts and comments to generate a user persona. It scrapes Reddit data directly.
 
 ## Features
 
@@ -47,90 +47,115 @@ python reddit_persona_analyzer.py https://www.reddit.com/user/Hungry-Move-6603/
 
 The script will generate a text file named `{username}_persona.txt` containing:
 
-1. **User Persona**: Detailed analysis including demographics, interests, personality traits, and behavioral patterns
-2. **Citations**: Specific posts and comments that support each persona characteristic
+1. **User Persona**: A structured summary including demographics, interests, personality traits, behavior patterns, and online habits.
+2. **Citations**: A list of specific Reddit posts/comments that support each persona insight.
 
 ## Script Architecture
 
 ### Main Components
 
-1. **RedditUserAnalyzer**: Main class handling the entire analysis pipeline
-2. **Data Scraping**: Supports both Reddit API and web scraping methods
-3. **Analysis Engine**: Processes user data to extract persona characteristics
-4. **AI Integration**: Uses OpenAI GPT for enhanced persona generation
-5. **Citation System**: Tracks source content for each persona element
+1. **RedditUserAnalyzer**: Orchestrates scraping and persona generation.
+2. **Data Scraping**: Extracts posts and comments using Reddit's public `.json` endpoints.
+3. **Rule-Based Classifier**: Organizes traits into structured categories using keyword mapping and frequency.
+4. **Citation System**: Extracts key URLs to support each characteristic.
+5. **Output Writer**: Formats and writes the final persona to a `.txt` file.
 
 ### Analysis Categories
 
-- **Basic Information**: Account age, karma, activity level
-- **Interests**: Top subreddits, primary/secondary interests
-- **Personality Traits**: Helpfulness, enthusiasm, curiosity, formality
-- **Communication Style**: Tone, writing length, readability
-- **Demographics**: Age range, location, profession (inferred)
-- **Activity Patterns**: Most active times, posting frequency
+- **Demographics**: Inferred location, age group, and role (e.g., student)
+- **Interests**: Active subreddits, repeated topics, hobbies
+- **Personality Traits**: Commenting/posting balance, tone, inferred sentiment
+- **Behavior Patterns**: Activity levels, frequency, diversity of content
+- **Goals & Motivations**: Inferred from repeated themes or posts
+- **Frustrations**: Common issues or complaints discussed
+- **Online Habits**: Time of activity, subreddit focus
+- **Citations**: Specific post/comment URLs backing the traits
 
-## Sample Output
+## Sample Output #1
 
 ```
-USER PERSONA
-
-Name: kojied
-Account Age: 365 days
-Activity Level: 15 posts, 45 comments
-
-INTERESTS & HOBBIES:
-Primary Interests: Technology (programming), Learning (learnpython)
-Secondary Interests: Lifestyle (coffee), Urban Living (AskNYC)
-
-PERSONALITY TRAITS:
-- Communication Style: Positive
-- Activity Pattern: Most active around 14:00
-- Engagement Level: Regular
+USER PERSONA: KOJIED
+==================================================
 
 DEMOGRAPHICS:
-- Likely Age Range: 25-35
-- Likely Location: Urban area
-- Likely Profession: Technology/Student
-
-BEHAVIORAL PATTERNS:
-- Prefers communities focused on technology and learning
-- Engages in helpful discussions
-- Regular contributor to community discussions
-
-======================================================
-CITATIONS
-======================================================
+--------------------
+Age Range: Unknown
+Location: Usa
+Occupation: Student
 
 INTERESTS:
-- Post in r/learnpython: "My experience with Python programming..."
-- Post in r/AskNYC: "Best coffee shops in NYC?..."
+--------------------
+• r/ManorLords community
+• r/VisionPro community
+• r/AskReddit community
+• r/OnePiece community
+• r/plantclinic community
+• Programming
+• Gaming
+• Technology
+• Music
+• Movies
 
-PERSONALITY:
-- Comment in r/programming: "I totally agree! Python is much more readable..."
-- Comment in r/AskNYC: "Try Blue Bottle Coffee on 30th Street..."
+PERSONALITY TRAITS:
+--------------------
+• More of a commenter than poster
+• Generally positive attitude
+
+BEHAVIOR PATTERNS:
+--------------------
+• Active in 24 different subreddits
+• Posts tend to receive good engagement
+
+GOALS & MOTIVATIONS:
+--------------------
+• Learn new skills
+• Career advancement
+• Help others
+• Entertainment
+
+FRUSTRATIONS:
+--------------------
+• Technical issues
+• Time management
+• Learning curve
+
+ONLINE HABITS:
+--------------------
+• Most active in r/ManorLords
+• Has made 47 posts/comments
+
+CITATIONS:
+--------------------
+Top Content:
+  - https://reddit.com/r/VisionPro/comments/1b4yi15/spacial_tours_with_3d_map_and_360_video/
+  - https://reddit.com/r/VisionPro/comments/1alx270/watching_edgerunners_on_the_moon_feels/
+  - https://reddit.com/r/projectzomboid/comments/13dwl0i/3_months_in_the_cleanest_and_most_functional_rv/
+  - https://reddit.com/r/Frugal/comments/15szxcx/how_do_you_decide_what_to_buy_and_not_buy/
+  - https://reddit.com/r/VisionPro/comments/1ajbkqm/would_you_guys_like_to_see_pokemon_go_in_avp/
 ```
 
 ## Error Handling
 
 The script includes comprehensive error handling for:
 
-- Invalid Reddit URLs
-- API rate limiting
-- Network connectivity issues
-- Missing API credentials
-- Empty or private profiles
+
+- Invalid or malformed Reddit usernames
+- Private or deleted profiles
+- Internet connectivity issues
+- No posts/comments found (inactive users)
+- Reddit temporarily unavailable
 
 ## Technical Details
 
 ### Dependencies
 
-- **praw**: Reddit API wrapper
-- **openai**: OpenAI API integration
 - **requests**: HTTP requests for web scraping
 - **beautifulsoup4**: HTML parsing
-- **textstat**: Text readability analysis
-- **python-dotenv**: Environment variable management
+- **re** (Python built-in): For keyword and pattern matching
+- `**os**: For file management and path handling
 
 ### Fallback Mechanisms
 
-1. If Reddit API fails
+1. **If a user has no posts or comments**: Script exits gracefully with a message.
+2. **If Reddit returns 429 (rate limit)**: Script prints a warning to retry later.
+3. **If output folder doesn't exist**: Script will create/write locally by default.
