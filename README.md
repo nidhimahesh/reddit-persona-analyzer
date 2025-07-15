@@ -4,19 +4,18 @@ A Python script that analyzes Reddit user profiles to generate comprehensive use
 
 ## Features
 
-- Scrapes Reddit user posts and comments
-- Analyzes interests, personality traits, communication style, and activity patterns  
-- Generates detailed user personas with AI assistance
-- Provides citations for each persona characteristic
-- Supports both Reddit API and web scraping methods
-- Follows PEP-8 coding guidelines
+- Scrapes **submitted posts** and **comments** from a Reddit user's profile
+- Builds a **text-based persona** inferred from user content
+- Cites relevant posts/comments for each trait
+- No API keys, login, or OpenAI access needed
+- Simple CLI-based usage
 
 ## Setup Instructions
 
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/nidhimahesh/reddit-persona-analyzer.git
 cd reddit-persona-analyzer
 ```
 
