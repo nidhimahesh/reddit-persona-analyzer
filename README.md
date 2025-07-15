@@ -26,37 +26,6 @@ cd reddit-persona-analyzer
 pip install -r requirements.txt
 ```
 
-### 3. Environment Setup
-
-Create a `.env` file in the project root with the following variables:
-
-```env
-# Reddit API Credentials (optional but recommended)
-REDDIT_CLIENT_ID=your_client_id
-REDDIT_CLIENT_SECRET=your_client_secret
-REDDIT_USERNAME=your_username
-REDDIT_PASSWORD=your_password
-REDDIT_USER_AGENT=UserPersonaAnalyzer/1.0
-
-# OpenAI API Key (optional - for enhanced AI analysis)
-OPENAI_API_KEY=your_openai_api_key
-```
-
-#### Getting Reddit API Credentials (Optional)
-
-1. Go to https://www.reddit.com/prefs/apps
-2. Click "Create App" or "Create Another App"
-3. Choose "script" as the app type
-4. Note down your client ID and secret
-5. Add these to your `.env` file
-
-#### Getting OpenAI API Key (Optional)
-
-1. Go to https://platform.openai.com/api-keys
-2. Create a new API key
-3. Add it to your `.env` file
-
-**Note**: The script works without API keys using web scraping and basic analysis, but API access provides more reliable data and enhanced AI-powered persona generation.
 
 ## Usage
 
