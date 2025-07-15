@@ -152,7 +152,7 @@ The script includes comprehensive error handling for:
 - **requests**: HTTP requests for web scraping
 - **beautifulsoup4**: HTML parsing
 - **re** (Python built-in): For keyword and pattern matching
-- `**os**: For file management and path handling
+- **os**: For file management and path handling
 
 ### Fallback Mechanisms
 
